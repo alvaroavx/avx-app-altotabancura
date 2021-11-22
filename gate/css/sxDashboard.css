@@ -1,0 +1,189 @@
+/* Encabezado */
+#brand {
+    height: 100px;
+    width: 250px;
+    background: url(../../res/brand/logo.png) no-repeat center center;
+    margin: 0px auto 10px;
+}
+#brand.portada {
+    height: 200px;
+    width: 400px;
+    background-size: contain;
+}
+#message {
+    text-align: center;
+}
+@media screen and (max-width: 700px) {
+    #message {
+        display: none;
+    }
+}
+#userpanel {
+    position: absolute;
+    right: 10px;
+    top: 80px;
+}
+#greets {
+
+}
+#signout {
+    padding-left: 20px;
+}
+
+/* Pie de página */
+#footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Menu */
+#topbar {
+    position: relative;
+}
+#menu {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Seccion central */
+.seccion {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Home Panel */
+#home {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Menu Lateral */
+#search {
+    padding: 50px 30px;
+    background: white;
+}
+.filtro .nombre{
+    padding: 5px 10px;
+    color: var(--azul-principal);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.filtro .valores{
+    border-radius: 5px;
+    padding: 5px;
+    background: white;
+}
+.opcion_filtro{
+    padding: 3px 10px;
+    cursor: pointer;
+    color: var(--azul-principal);
+    font-weight: 700;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: relative;
+}
+.opcion_filtro:active,
+.opcion_filtro:focus,
+.opcion_filtro:hover {
+    color: white;
+    background-color: var(--azul-principal);
+}
+.opcion_filtro.selected{
+    background: var(--azul-principal);
+    color: white;
+}
+.opcion_filtro i {
+    font-style: initial;
+    right: 10px;
+    position: absolute;
+}
+
+/* Menu Lateral Admin */
+#admin {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+#contenido_admin {
+    display: none;
+}
+
+/* BOTONES */
+.button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    justify-content: space-evenly;
+}
+.button.hidden {
+    display: none;
+}
+.button span {
+    margin-right: 10px;
+    font-weight: bold;
+}
+.button.file {
+    color: var(--rojo);
+    border: 2px solid var(--rojo);
+}
+.button.file:active,
+.button.file:hover,
+.button.file:focus {
+    background-color: var(--rojo);
+    color: white;
+}
+.button.file:active > .icon div,
+.button.file:hover > .icon div,
+.button.file:focus > .icon div {
+    background-color: white;
+}
+.button.filter {
+    color: white;
+    border: 2px solid var(--azul-principal);
+    background-color: var(--azul-principal);
+    margin-bottom: 10px;
+
+}
+.button.filter:active,
+.button.filter:hover,
+.button.filter:focus {
+    background-color: white;
+    color: var(--azul-principal);
+}
+.button.filter:active > .icon div,
+.button.filter:hover > .icon div,
+.button.filter:focus > .icon div {
+    background-color: var(--azul-principal);
+}
+.button.cancel {
+    border: 2px solid var(--rojo);
+    background-color: var(--rojo);
+    color: white;
+}
+.button.cancel:active,
+.button.cancel:hover,
+.button.cancel:focus {
+    background-color: white;
+    color: var(--rojo);
+}
+.button.cancel:active > .icon div,
+.button.cancel:hover > .icon div,
+.button.cancel:focus > .icon div {
+    background-color: var(--rojo);
+}
+#certificado_masivo_button {
+    margin-left: 10px;
+}

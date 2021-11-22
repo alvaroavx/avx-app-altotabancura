@@ -1,0 +1,613 @@
+/* Estilos Generales */
+:root{
+    --azul-principal: #0A37AA;
+    --azul-principal2: #3e72f4;
+    --naranjo-principal: #EF7800;
+    --azul-fondo: #aed7ea;
+    --azul-fondo2: #d6ebf5;
+    --rojo: #B60708;
+    --verde: #00802b;
+}
+* {
+    box-sizing: border-box;
+}
+header{
+}
+body{
+    font-size: 13px;
+    font-family: Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    /*margin: -10px 0px 0px;*/
+}
+footer{
+}
+table{
+}
+td, tr{
+}
+ul, li{
+    padding: 0px;
+    list-style: none;
+    margin: 0;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+/* color de fondo del scroll */
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+::-webkit-scrollbar-track-piece{
+    background: none;
+}
+/* color del scroll */
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: black;
+}
+.clickable {
+    cursor: pointer;
+}
+
+/* Botones */
+.boton{
+    padding: 2px 10px;
+    cursor: pointer;
+    min-width: 100px;
+    text-align: center;
+    color: white;
+    background: none;
+}
+.boton:hover,
+.boton:focus,
+.boton:active{
+    opacity: 0.8;
+    font-weight: 600;
+    background-color: black;
+    color: white;
+}
+
+/* Titulos */
+h1, .h1{
+    font-size: 24px;
+    font-weight: 500;
+}
+h2, .h2{
+    font-size: 20px;
+    font-weight: 600;
+}
+h3, .h3{
+    font-size: 16px;
+    font-weight: 500;
+}
+h4, .h4{
+    font-size: 12px;
+    font-weight: 600;
+}
+p, .p{
+    font-size: 12px;
+    text-align: justify;
+}
+a, .a{
+    cursor: pointer;
+    color: inherit;
+}
+b, .b{
+    font-weight: 600;
+}
+a:hover,
+a:focus,
+a:active,
+.a:hover,
+.a:focus,
+.a:active{
+    text-decoration: underline;
+    font-weight: 600;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
+
+#goup {
+    display: none;
+}
+
+/* General */
+.center {
+    text-align: center;
+}
+.hidden {
+    display: none;
+}
+/* Errores */
+.error {
+    /*border: 1px solid darkred !important;
+    background-color: rgba(139, 0, 0, 0.5) !important;*/
+}
+
+/* Floats */
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+
+/* Titulos */
+.brand {
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+/* Portada Login */
+#fondo_portada {
+    width: 100%;
+    height: 100vh;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--azul-fondo);
+    padding-bottom: 50px;
+    padding-top: 30px;
+}
+#contenedor_portada {
+    display: flex;
+    width: 80%;
+}
+.portada_ayuda {
+    width: 50%;
+    padding: 10px 30px 0;
+    border: 2px solid #0A37AA;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.5);
+}
+.bloque_texto {}
+.bloque_texto p {
+    text-align: center;
+    font-size: 13px;
+}
+.portada_login {
+    width: 50%;
+    height: 400px;
+}
+#logo_portada {
+    font-size: 30px;
+    color: white;
+}
+.loginrow{
+    width: 500px;
+    margin: auto;
+    padding-top: 30px;
+    max-width: 90%;
+}
+.title_login{
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+.description_login{
+    color: white;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+.label_login{
+    color: white;
+    font-size: 16px;
+}
+.input_login{
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    width: 100%;
+}
+input.input_login::placeholder{
+    color: #999999;
+    font-style: italic;
+    font-size: 14px;
+}
+.recover_login{
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+}
+.recover_login:focus,
+.recover_login:hover,
+.recover_login:active{
+    font-weight: 600;
+    text-decoration: underline;
+}
+.submit_login:focus,
+.submit_login:hover,
+.submit_login:active{
+
+}
+.submit_login{
+    font-size: 22px;
+    display: inline-block;
+    width: calc(100% - 4px);
+    padding: 5px 0;
+    line-height: normal;
+}
+
+#error_login{
+    margin: 10px 0;
+    width: 100%;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+}
+#error_login label{
+    padding: 3px 10px;
+}
+@media screen and (max-width: 800px) {
+    .loginrow {
+        width: 100%;
+    }
+}
+
+/* Terminos y Condiciones */
+#terminocondicion{
+    background: white;
+    padding: 10px 20px;
+    border: 1px solid blue;
+}
+#condition_login + a:hover,
+#condition_login + a:focus,
+#condition_login + a:active{
+    color: white;
+}
+/* Encabezado */
+#header {
+    border-bottom: 1px solid var(--azul-principal);
+    padding-bottom: 20px;
+    background-color: var(--azul-fondo);
+    position: relative;
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    0px 1px 3px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         0px 1px 3px 0px rgba(50, 50, 50, 0.75);
+}
+/* Modal para las opciones */
+#loadmodal {}
+
+/* Columna Izquierda */
+#leftcol {}
+
+/* Bloque central */
+#midblock {
+    margin: 0;
+}
+#midblock.logged {}
+
+/* Columna derecha */
+#rightcol {}
+#rightcol.pinned {}
+
+/* Pantalle de Cargando */
+.cargando {
+    position: absolute;
+    left: 290px;
+    top: 0px;
+    height: calc(100% - 60px);
+    width: calc(100% - 290px);
+    opacity: 0.3;
+    background: url(../../res/cargando.gif) center center no-repeat #6c757d;
+    background-size: 200px;
+    z-index: 1;
+    display: none;
+}
+.cargando.up {
+    display: block;
+}
+
+/* Iconos */
+.icon {
+    width: fit-content;
+    height: fit-content;
+    margin: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.icon div {
+    width: 30px;
+    height: 30px;
+}
+.icon.small {
+    margin: 0;
+}
+.icon.small div {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+.icon.active,
+.icon:active,
+.icon:focus,
+.icon:hover {
+}
+.icon .bars {
+    -webkit-mask: url(../../res/icon/bars.svg) no-repeat center center;
+    mask: url(../../res/icon/bars.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .search {
+    background: url(../../res/icon/search.svg) center center no-repeat;
+    background-size: 15px 15px;
+ }
+.icon .bell {
+    background: url(../../res/icon/bell.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .comments {
+    background: url(../../res/icon/comments.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .user {
+    background: url(../../res/icon/user.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .list {
+    background: url(../../res/icon/list.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .squares {
+    background: url(../../res/icon/squares.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .info {
+    background: url(../../res/icon/info.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .eloraculo {
+    background: url(../../res/icon/eloraculo.svg) center center no-repeat;
+    background-size: 30px 30px;
+}
+/* iconos del menu */
+.icon .home {
+    background: url(../../res/icon/home.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .new {
+    -webkit-mask: url(../../res/icon/new.svg) no-repeat center center;
+    mask: url(../../res/icon/new.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .star {
+    background: url(../../res/icon/star.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .tags {
+    background: url(../../res/icon/tags.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .config {
+    -webkit-mask: url(../../res/icon/config.svg) no-repeat center center;
+    mask: url(../../res/icon/config.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .question {
+    background: url(../../res/icon/question.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .logout {
+    -webkit-mask: url(../../res/icon/logout.svg) no-repeat center center;
+    mask: url(../../res/icon/logout.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .usershared {
+    background: url(../../res/icon/usershared.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .copyright {
+    background: url(../../res/icon/copyright.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .globe {
+    background: url(../../res/icon/globe.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .save {
+    background: url(../../res/icon/save.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .pin {
+    background: url(../../res/icon/pin.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .edit {
+    background: url(../../res/icon/edit.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .delete {
+    background: url(../../res/icon/delete.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .eye {
+    background: url(../../res/icon/eye.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .heart {
+    background: url(../../res/icon/heart.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .trash {
+    background: url(../../res/icon/trash.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .ban {
+    background: url(../../res/icon/ban.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .restore {
+    background: url(../../res/icon/restore.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .clone {
+    background: url(../../res/icon/clone.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .bookmark {
+    background: url(../../res/icon/bookmark.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .box {
+    background: url(../../res/icon/box.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .index {
+    background: url(../../res/icon/index.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .file {
+    -webkit-mask: url(../../res/icon/file.svg) no-repeat center center;
+    mask: url(../../res/icon/file.svg) no-repeat center center;
+    background-color: var(--rojo);
+    background-size: 20px 20px;
+}
+.icon .file2 {
+    -webkit-mask: url(../../res/icon/file.svg) no-repeat center center;
+    mask: url(../../res/icon/file.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .cancel {
+    -webkit-mask: url(../../res/icon/cancel.svg) no-repeat center center;
+    mask: url(../../res/icon/cancel.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .filter {
+    -webkit-mask: url(../../res/icon/filter.svg) no-repeat center center;
+    mask: url(../../res/icon/filter.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .right-chevron {
+    -webkit-mask: url(../../res/icon/chevron-right.svg) no-repeat center center;
+    mask: url(../../res/icon/chevron-right.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .down-chevron {
+    -webkit-mask: url(../../res/icon/chevron-down.svg) no-repeat center center;
+    mask: url(../../res/icon/chevron-down.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .right-caret {
+    -webkit-mask: url(../../res/icon/caret-right.svg) no-repeat center center;
+    mask: url(../../res/icon/caret-right.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .down-caret {
+    -webkit-mask: url(../../res/icon/caret-down.svg) no-repeat center center;
+    mask: url(../../res/icon/caret-down.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .user-student {
+    -webkit-mask: url(../../res/icon/userstudent.svg) no-repeat center center;
+    mask: url(../../res/icon/userstudent.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .university {
+    -webkit-mask: url(../../res/icon/university.svg) no-repeat center center;
+    mask: url(../../res/icon/university.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .syringe {
+    -webkit-mask: url(../../res/icon/syringe.svg) no-repeat center center;
+    mask: url(../../res/icon/syringe.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .syringe2 {
+    background: url(../../res/icon/syringe.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .syringe3 {
+    -webkit-mask: url(../../res/icon/syringe.svg) no-repeat center center;
+    mask: url(../../res/icon/syringe.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .graduation {
+    -webkit-mask: url(../../res/icon/graduation.svg) no-repeat center center;
+    mask: url(../../res/icon/graduation.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+
+.icon .users {
+    -webkit-mask: url(../../res/icon/users.svg) no-repeat center center;
+    mask: url(../../res/icon/users.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .okey {
+    background: url(../../res/icon/okey.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .okey2 {
+    -webkit-mask: url(../../res/icon/okey.svg) no-repeat center center;
+    mask: url(../../res/icon/okey.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}
+.icon .cancel2 {
+    background: url(../../res/icon/cancel.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon .usercard {
+    -webkit-mask: url(../../res/icon/usercard.svg) no-repeat center center;
+    mask: url(../../res/icon/usercard.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .newblue {
+    -webkit-mask: url(../../res/icon/new.svg) no-repeat center center;
+    mask: url(../../res/icon/new.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .trashblue {
+    -webkit-mask: url(../../res/icon/trash.svg) no-repeat center center;
+    mask: url(../../res/icon/trash.svg) no-repeat center center;
+    background-color: var(--azul-principal);
+    background-size: 20px 20px;
+}
+.icon .trashwhite {
+    -webkit-mask: url(../../res/icon/trash.svg) no-repeat center center;
+    mask: url(../../res/icon/trash.svg) no-repeat center center;
+    background-color: white;
+    background-size: 20px 20px;
+}

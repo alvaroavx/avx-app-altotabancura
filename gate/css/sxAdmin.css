@@ -1,0 +1,265 @@
+/**
+    Estilos del Administrador
+ */
+
+/** SECCION CENTRAL **/
+#usergrid {
+    padding: 10px;
+    padding-bottom: 0px;
+    display: flex;
+}
+#admingrid {
+    display: flex;
+}
+.adminrow {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.admincol {
+    height: fit-content;
+    min-width: 300px;
+    padding: 20px 20px 40px;
+    background-color: var(--azul-fondo2);
+    border: 1px solid white;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.admincol.active,
+.admincol:active,
+.admincol:hover,
+.admincol:focus {
+    background-color: #add7eb;
+}
+#carrerasrow {
+    /*margin: 0 10px;*/
+}
+.results_admin {
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/** SIDEBAR **/
+.opcion_admin{
+    padding: 3px 10px;
+    cursor: pointer;
+    color: var(--azul-principal);
+    font-weight: 700;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: relative;
+}
+.opcion_admin:active,
+.opcion_admin:focus,
+.opcion_admin:hover {
+    color: white;
+    background-color: var(--azul-principal);
+}
+.date_filter {
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.opcion_admin_date {
+    padding: 3px 10px;
+    color: var(--azul-principal);
+    font-weight: 700;
+    border: 1px solid white;
+    position: relative;
+}
+
+/* Botones */
+.botonesadmin {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.botonesformulario {
+    display: flex;
+    align-items: center;
+}
+.adminbtn {
+    color: white;
+    border: 1px solid var(--azul-principal2);
+    background-color: var(--azul-principal2);
+    margin-bottom: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: fit-content;
+}
+.adminbtn:active,
+.adminbtn:hover,
+.adminbtn:focus {
+    background-color: white;
+    color: var(--azul-principal2);
+}
+.adminbtn:active > .icon div,
+.adminbtn:hover > .icon div,
+.adminbtn:focus > .icon div {
+    background-color: var(--azul-principal2);
+}
+.adminbtn .icon div {
+    width: 20px;
+    height: 20px;
+}
+.adminbtn.cancel {
+    color: white;
+    border: 1px solid var(--rojo);
+    background-color: var(--rojo);
+}
+.adminbtn.cancel:active,
+.adminbtn.cancel:hover,
+.adminbtn.cancel:focus {
+    background-color: white;
+    color: var(--rojo);
+}
+.adminbtn.cancel:active > .icon div,
+.adminbtn.cancel:hover > .icon div,
+.adminbtn.cancel:focus > .icon div {
+    background-color: var(--rojo);
+}
+.adminbtn.success {
+    color: white;
+    border: 1px solid var(--verde);
+    background-color: var(--verde);
+}
+.adminbtn.success:active,
+.adminbtn.success:hover,
+.adminbtn.success:focus {
+    background-color: white;
+    color: var(--verde);
+}
+.adminbtn.success:active > .icon div,
+.adminbtn.success:hover > .icon div,
+.adminbtn.success:focus > .icon div {
+    background-color: var(--verde);
+}
+/* Formularios */
+.formulario {
+    background: var(--azul-fondo2);
+    border-radius: 5px;
+    padding: 5px 10px 10px;
+}
+.formulario .titulo {
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+    font-weight: bold;
+}
+.formulario input {
+
+}
+.formulario .adminput{
+    color: var(--azul-principal);
+    border: 1px solid var(--azul-principal2);
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+.formulario .adminput:active,
+.formulario .adminput:hover,
+.formulario .adminput:focus {
+    background-color: lightgray;
+}
+.formulario input::placeholder {
+    color: var(--azul-principal);
+}
+.formulario button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.formulario .usermessage {
+    font-style: italic;
+    font-size: 14px;
+}
+.usermessage.red {
+    color: var(--rojo);
+}
+.usermessage.green {
+    color: var(--verde);
+}
+.usermessage.blue {
+    color: var(--azul-principal2);
+}
+/**  **/
+input.rework,
+select.rework {
+    background-color: transparent;
+    border: 1px solid black;
+    width: 100%;
+    border-radius: 5px;
+    padding: 1px 5px;
+    cursor: pointer;
+}
+
+/** TABLAS **/
+.dataTables_wrapper {
+    padding: 10px;
+}
+input[type="search"] {
+    border: 1px solid var(--azul-fondo2);
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+input[type="search"]:hover,
+input[type="search"]:active,
+input[type="search"]:focus {
+    border-color: black;
+}
+/** PANEL BOTONES **/
+.formbotones {
+    display: flex;
+    align-items: center;
+}
+.formbotones.rework {
+}
+
+/** VISTA USUARIOS **/
+.adminform {
+    border: 1px solid var(--azul-principal2);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: none;
+}
+.adminform.open {
+    display: block;
+}
+.usuariobotones {
+    display: flex;
+}
+.adminform input,
+.adminform select {
+    max-width: calc((100% - 30px) / 3);
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+#vacunasformulario {
+    display: none;
+}
+#vacunasformulario.open {
+    display: block;
+}
+.vacunarow {
+    display: flex;
+    align-items: baseline;
+}
+.vacunarow .numero {
+    margin: 0 20px;
+    font-size: 16px;
+    color: var(--azul-principal);
+}
+.vacunarow .formbotones {
+    margin-bottom: 5px;
+}
