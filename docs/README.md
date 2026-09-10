@@ -6,6 +6,7 @@ dominio_produccion: http://vacunatorioaltotabancura.cl/
 stack: PHP 5.6 · framework propio "Valk/Steins" · SQL Server · jQuery
 estado_documentacion: completa (generada por análisis estático del código, 2026-09-09)
 fuente_de_verdad: el código del repositorio; esta documentación es derivada
+alcance: evidencia estática; no certifica operación, base de datos ni producción
 ---
 
 # Documentación IA-First — avx-app-altotabancura
@@ -89,3 +90,69 @@ avx-app-altotabancura/
 | ✅ **Verificado** | Leído directamente en el código, con referencia `archivo:línea`. |
 | 🔍 **Inferido** | Deducido de nombres, parámetros o uso; no verificable sin acceso a la BD o al servidor. |
 | ❓ **Desconocido** | Requiere acceso a la base de datos de producción, al servidor o a la persona autora. |
+
+Una recomendación, diseño objetivo o plan de remediación no significa que ya esté implementado.
+
+## Estado de evidencia y límites
+
+| Área | Evidencia disponible | Límite importante |
+|---|---|---|
+| Aplicación | Lectura estática de PHP, JavaScript, configuración y dependencias versionadas | No prueba ejecución bajo PHP 5.6 ni comportamiento en servidor real |
+| Persistencia | Nombres, parámetros y resultados consumidos de procedimientos | No hay DDL, migraciones, tablas ni procedures versionados |
+| Seguridad | Superficie y controles observables en el repositorio | No hubo pentest, escaneo dinámico ni verificación de configuración externa |
+| Operación | Requisitos y runbook propuestos desde el código | No hay despliegue reproducible, CI ni evidencia de producción |
+| Datos clínicos | Flujos y riesgos documentados | Nunca incluir datos reales, credenciales, tokens ni contenido de usuarios |
+
+## Rutas de lectura según la tarea
+
+| Si necesitas… | Lee primero | Continúa con |
+|---|---|---|
+| Entender propósito, actores y reglas de negocio | [00 · Contexto de negocio](00-contexto-negocio.md) | [05 · Flujos funcionales](05-flujos-funcionales.md) |
+| Reconstruir una petición, ruta o acción AJAX | [01 · Arquitectura](01-arquitectura.md) | [07 · Catálogo de endpoints](07-catalogo-endpoints.md), [10 · Convenciones Valk](10-convenciones-valk.md) |
+| Trabajar con entidades, resultados o procedimientos | [03 · Modelo de datos](03-modelo-datos.md) | [06 · Diagramas de clases](06-diagramas-clases.md) |
+| Analizar qué puede hacer cada perfil | [04 · Roles y permisos](04-roles-y-permisos.md) | [08 · Seguridad](08-seguridad.md) antes de confiar en la UI |
+| Modificar una funcionalidad heredada | [11 · Guía para agentes](11-guia-para-agentes.md) | [10 · Convenciones Valk](10-convenciones-valk.md), después el flujo afectado |
+| Evaluar un despliegue, exposición o incidente | [08 · Seguridad](08-seguridad.md) | [02 · Stack tecnológico](02-stack-tecnologico.md), [09 · Mejoras y deuda](09-mejoras-deuda-tecnica.md) |
+
+## Índice detallado
+
+| Documento | Pregunta que responde |
+|---|---|
+| [00 · Contexto de negocio](00-contexto-negocio.md) | ¿Qué problema resuelve, quiénes participan y cuáles son las reglas observables? |
+| [01 · Arquitectura](01-arquitectura.md) | ¿Cómo viaja una petición entre navegador, Valk, dominio, archivos y SQL Server? |
+| [02 · Stack tecnológico](02-stack-tecnologico.md) | ¿Qué runtime, librerías, configuración y requisitos operativos se observan? |
+| [03 · Modelo de datos](03-modelo-datos.md) | ¿Qué modelo conceptual y contratos de procedimientos se pueden reconstruir? |
+| [04 · Roles y permisos](04-roles-y-permisos.md) | ¿Qué roles muestra la UI y dónde faltan controles? |
+| [05 · Flujos funcionales](05-flujos-funcionales.md) | ¿Cómo funcionan login, certificados, búsquedas, ABM y recuperación? |
+| [06 · Diagramas de clases](06-diagramas-clases.md) | ¿Qué responsabilidades tienen Valk, Wiss, modelos y cliente? |
+| [07 · Catálogo de endpoints](07-catalogo-endpoints.md) | ¿Qué rutas y funciones son invocables y cómo se codifica `rawdata`? |
+| [08 · Seguridad](08-seguridad.md) | ¿Qué hallazgos requieren contención y qué no puede verificarse estáticamente? |
+| [09 · Mejoras y deuda técnica](09-mejoras-deuda-tecnica.md) | ¿Qué priorizar para recuperar seguridad, operación y mantenibilidad? |
+| [10 · Convenciones Valk](10-convenciones-valk.md) | ¿Cómo componer módulos sin romper contratos internos? |
+| [11 · Guía para agentes](11-guia-para-agentes.md) | ¿Cómo investigar, cambiar y validar con límites explícitos? |
+
+## Antes de intervenir o desplegar
+
+1. Lea [08 · Seguridad](08-seguridad.md); sus hallazgos son riesgos a confirmar y contener, no cambios ya realizados.
+2. Trace cliente → `/g` → handler → modelo → procedimiento almacenado. La visibilidad de la UI no demuestra autorización servidor a servidor.
+3. Para cambios de datos, obtenga DDL, procedimientos, respaldo probado y estrategia de rollback/forward-fix: el repositorio no basta.
+4. No copie secretos ni datos clínicos en documentos, tickets, logs o respuestas; externalice y rote secretos mediante un plan coordinado.
+5. Valide en ambiente aislado: runtime objetivo, flujos por rol, autorización horizontal, sesión, XSS/CSRF/upload y restauración.
+
+## Mapa de ejecución observable
+
+```text
+index.php / rutas amigables
+  -> valk/alphonse.php (ruteo y assets)
+  -> valk/gatekeeper.php (/g, despacho dinámico)
+  -> gate/omega o valk/ro (presentación y acciones)
+  -> gate/class -> Wiss/Valk/Steins (servicios y datos)
+  -> SQL Server (procedimientos almacenados no versionados)
+```
+
+## Mantenimiento de este índice
+
+- Actualice el índice si cambia la topología documental; conserve enlaces relativos y Mermaid compatible.
+- Diferencie evidencia estática, validación local, integración real y producción.
+- No convierta hipótesis, configuración versionada o recomendaciones en hechos operativos.
+- La documentación es una guía navegable; la fuente de verdad sigue siendo el comportamiento efectivo y sus dependencias externas.
