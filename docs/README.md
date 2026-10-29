@@ -18,6 +18,8 @@ alcance: evidencia estática; no certifica operación, base de datos ni producci
 
 ## Cómo leer esta documentación
 
+Las rutas de código citadas en estos documentos se interpretan desde `src/`, que es la raíz ejecutable de la aplicación.
+
 | Si tu objetivo es… | Empieza por |
 |---|---|
 | Entender qué hace el sistema y para quién | [`00-contexto-negocio.md`](00-contexto-negocio.md) |
@@ -32,6 +34,7 @@ alcance: evidencia estática; no certifica operación, base de datos ni producci
 | Planificar refactors o mejoras | [`09-mejoras-deuda-tecnica.md`](09-mejoras-deuda-tecnica.md) |
 | Escribir código que "encaje" en el proyecto | [`10-convenciones-valk.md`](10-convenciones-valk.md) |
 | Operar sobre el repo siendo un agente de IA | [`11-guia-para-agentes.md`](11-guia-para-agentes.md) |
+| Levantar el laboratorio Docker y restaurar el respaldo | [`entorno-local.md`](entorno-local.md) |
 
 ## Resumen ejecutivo en 10 líneas
 
@@ -50,37 +53,37 @@ alcance: evidencia estática; no certifica operación, base de datos ni producci
 
 ```
 avx-app-altotabancura/
-├── index.php              # Único punto de entrada HTML (cascarón SPA)
-├── manifest.php           # Configuración del entorno (URLs, flags, versiones)
-├── test.php               # Script de pruebas manual (código muerto, expuesto)
-├── .htaccess / web.config # Reescritura: todo → index.php (Apache / IIS)
-├── log.txt                # Log de texto plano escrito por Log2()
-├── cache/                 # Artefactos JS/CSS concatenados generados en runtime
-├── gate/                  # ← LA APLICACIÓN (lógica específica del negocio)
-│   ├── construct.php      #   Lista de módulos a cargar
-│   ├── shortcut.php       #   Rutas amigables permitidas
-│   ├── var.php keys.php meta.php  # Config del "gate"
-│   ├── class/  (cXxx.php) #   Modelos de dominio → llaman procedimientos almacenados
-│   ├── omega/  (xXxx.php) #   Controladores/vistas públicos (renderizan HTML)
-│   ├── alfa/   (aXxx.php) #   Controladores solo-admin (prácticamente vacío)
-│   ├── js/     (jxXxx.js) #   Cliente jQuery por módulo
-│   ├── css/    (sxXxx.css)#   Estilos por módulo
-│   └── lang/   (lXxx.php) #   Textos i18n (sin uso efectivo)
-├── valk/                  # ← EL FRAMEWORK (reutilizable entre proyectos)
-│   ├── loader.php         #   Bootstrap
-│   ├── alphonse.php       #   Router / servidor de assets
-│   ├── gatekeeper.php     #   Dispatcher del endpoint /g
-│   ├── Wiss.php cValk.php #   Fachada de servicios y orquestador
-│   ├── commands/ (wXxx)   #   Traits: API de alto nivel para el gate
-│   ├── mu/v1.0/           #   Módulos de servicio (Steins, Query, Login, Mail…)
-│   ├── ro/     (rXxx.php) #   Rutinas globales (login, uploader, debug)
-│   ├── tools/  (tXxx.php) #   Funciones utilitarias globales
-│   ├── default/(dXxx.php) #   Valores por defecto de configuración
-│   ├── js/v1.0/ css/v1.0/ #   Cliente del framework
-├── vendor/                # Librerías de terceros copiadas a mano (sin Composer)
-│   ├── FPDF/ PHPMailer/ Facebook/ Google/ Jodit/
-├── res/ img/              # Recursos estáticos (íconos, logo, firma digitalizada)
-└── docs/                  # ← esta documentación
+├── src/                   # ← raíz ejecutable y código fuente
+│   ├── index.php          # Único punto de entrada HTML (cascarón SPA)
+│   ├── manifest.php       # Configuración del entorno (URLs, flags, versiones)
+│   ├── test.php           # Script de pruebas manual (código muerto, expuesto)
+│   ├── .htaccess / web.config # Reescritura: todo → index.php (Apache / IIS)
+│   ├── log.txt            # Log de texto plano escrito por Log2()
+│   ├── cache/             # Artefactos JS/CSS concatenados generados en runtime
+│   ├── gate/              # ← LA APLICACIÓN (lógica específica del negocio)
+│   │   ├── construct.php  #   Lista de módulos a cargar
+│   │   ├── shortcut.php   #   Rutas amigables permitidas
+│   │   ├── var.php keys.php meta.php  # Config del "gate"
+│   │   ├── class/  (cXxx.php) # Modelos de dominio → procedimientos almacenados
+│   │   ├── omega/  (xXxx.php) # Controladores/vistas públicos
+│   │   ├── alfa/   (aXxx.php) # Controladores solo-admin
+│   │   ├── js/     (jxXxx.js) # Cliente jQuery por módulo
+│   │   ├── css/    (sxXxx.css)# Estilos por módulo
+│   │   └── lang/   (lXxx.php) # Textos i18n
+│   ├── valk/              # ← EL FRAMEWORK (reutilizable entre proyectos)
+│   │   ├── loader.php     #   Bootstrap
+│   │   ├── alphonse.php   #   Router / servidor de assets
+│   │   ├── gatekeeper.php #   Dispatcher del endpoint /g
+│   │   ├── Wiss.php cValk.php # Fachada de servicios y orquestador
+│   │   ├── commands/ mu/ ro/ tools/ default/
+│   │   └── js/ css/       #   Cliente del framework
+│   ├── vendor/            # Librerías de terceros copiadas a mano (sin Composer)
+│   │   └── FPDF/ PHPMailer/ Facebook/ Google/ Jodit/
+│   └── res/ img/          # Recursos estáticos (íconos, logo, firma digitalizada)
+├── data/                  # Respaldos locales de BD; los .bak no se versionan
+├── docs/                  # ← documentación IA First
+├── AGENTS.md              # Guía operativa para agentes
+└── README.md              # Entrada humana al repositorio
 ```
 
 ## Convención de confianza usada en estos documentos

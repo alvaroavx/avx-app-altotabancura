@@ -46,6 +46,8 @@ sequenceDiagram
     Note over DB: ⚠️ la verificación de la contraseña<br/>y el conteo de intentos ocurren<br/>DENTRO del procedimiento (código no versionado)
     DB-->>AU: {IdUsuario, Username, IdTipoUsuario,<br/>IdUniversidad, Fails}
 
+    Note over W,AU: Si la consulta no retorna filas,<br/>ValidaLogin entrega un array vacío<br/>y Autentificar lo trata como rechazo
+
     alt IdUsuario = 0 (credenciales inválidas)
         AU-->>U: "Usuario o contraseña incorrecta"
         alt Fails 1–3
@@ -73,6 +75,7 @@ sequenceDiagram
 | 3 | El algoritmo de hash de contraseña es ❓ **desconocido** (vive en el SP). `RecoverPassPush` usa `md5()`, lo que sugiere MD5 sin sal | `rLogin.php:307` |
 | 4 | El mensaje de bloqueo revela si la cuenta existe (enumeración de usuarios) | `rLogin.php:57-70` |
 | 5 | El identificador de sesión PHP **no se regenera** tras autenticar ⇒ *session fixation* | `rLogin.php:74-103` |
+| 6 | Una respuesta vacía del procedimiento se normaliza como credenciales inválidas, sin intentar leer índices inexistentes | `wLogin.php`, `rLogin.php` |
 
 ---
 

@@ -34,6 +34,25 @@ La prioridad es reducir el riesgo antes de cualquier exposición pública: retir
 
 La guía IA First, con arquitectura, flujos, modelo de datos reconstruido, riesgos, convenciones y guía operativa, está en [docs/README.md](docs/README.md). Úsala para orientarte y verifica en código y base de datos antes de un cambio sensible.
 
+## Estructura del repositorio
+
+- `src/`: código fuente y raíz ejecutable de la aplicación legado.
+- `data/`: respaldos locales de base de datos; los archivos `.bak` no se versionan.
+- `docs/`: documentación IA First.
+- `README.md` y `AGENTS.md`: puntos de entrada del repositorio.
+
 ## Inicio y estado conocido
 
-El runtime esperado es PHP 5.6; requisitos, configuración y límites de despliegue están documentados en [docs/02-stack-tecnologico.md](docs/02-stack-tecnologico.md). No hay migraciones, esquema SQL ni pipeline reproducible versionados. No se debe desplegar el snapshot a internet sin revisar [seguridad](docs/08-seguridad.md).
+La raíz web de la aplicación es `src/`. El runtime esperado es PHP 5.6; requisitos, configuración y límites de despliegue están documentados en [docs/02-stack-tecnologico.md](docs/02-stack-tecnologico.md). No hay migraciones, esquema SQL ni pipeline reproducible versionados. No se debe desplegar el snapshot a internet sin revisar [seguridad](docs/08-seguridad.md).
+
+El laboratorio Docker para recuperación de certificados se opera siguiendo [docs/entorno-local.md](docs/entorno-local.md). Es exclusivamente local y no reemplaza la infraestructura productiva.
+
+## Pruebas automatizadas
+
+Con el laboratorio Docker levantado, ejecute la suite de integración:
+
+```bash
+./tests/run.sh
+```
+
+La suite utiliza únicamente cuentas ficticias locales y prioriza autenticación de alumnos, generación, persistencia y descarga de certificados PDF.

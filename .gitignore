@@ -1,0 +1,8 @@
+.env
+.env.local
+src/out/
+data/*.bak
+data/*.mdf
+data/*.ndf
+data/*.ldf
+data/inspection/
