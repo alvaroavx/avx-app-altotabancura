@@ -20,7 +20,7 @@ class Carrera extends Wiss {
 
     public function CreateModify($IdCarrera, $Nombre) {
         $Datos['IdCarrera'] = $IdCarrera;
-        $Datos['Nombre'] = utf8_encode($Nombre);
+        $Datos['Nombre'] = Latin1ToUtf8($Nombre);
         return Wiss::Query('spIns_Carrera', $Datos);
     }
 

@@ -11,11 +11,11 @@ class XLSXWriter{
 	const EXCEL_2007_MAX_ROW=1048576;
 	const EXCEL_2007_MAX_COL=16384;
 	//------------------------------------------------------------------
-	protected $title;
-	protected $subject;
-	protected $author;
-	protected $company;
-	protected $description;
+	protected $title = '';
+	protected $subject = '';
+	protected $author = '';
+	protected $company = '';
+	protected $description = '';
 	protected $keywords = array();
 
 	protected $current_sheet;
@@ -23,6 +23,7 @@ class XLSXWriter{
 	protected $temp_files = array();
 	protected $cell_styles = array();
 	protected $number_formats = array();
+	protected $tempdir = '';
 
 	public function __construct()
 	{
@@ -361,7 +362,7 @@ class XLSXWriter{
 
 		if (!is_scalar($value) || $value==='') { //objects, array, empty
 			$file->write('<c r="'.$cell_name.'" s="'.$cell_style_idx.'"/>');
-		} elseif (is_string($value) && $value{0}=='='){
+		} elseif (is_string($value) && $value[0]=='='){
 			$file->write('<c r="'.$cell_name.'" s="'.$cell_style_idx.'" t="s"><f>'.self::xmlspecialchars($value).'</f></c>');
 		} elseif ($num_format_type=='n_date') {
 			$file->write('<c r="'.$cell_name.'" s="'.$cell_style_idx.'" t="n"><v>'.intval(self::convert_date_time($value)).'</v></c>');

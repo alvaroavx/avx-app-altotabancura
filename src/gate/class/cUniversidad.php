@@ -19,7 +19,7 @@ class Universidad extends Wiss {
 
     public function CreateModify($IdUniversidad, $Nombre) {
         $Datos['IdUniversidad'] = $IdUniversidad;
-        $Datos['Nombre'] = utf8_encode($Nombre);
+        $Datos['Nombre'] = Latin1ToUtf8($Nombre);
         return Wiss::Query('spIns_Universidad', $Datos);
     }
 

@@ -16,7 +16,7 @@ graph TB
     end
 
     subgraph "Servidor Web (IIS o Apache)"
-        APP["Aplicación PHP 5.6<br/>avx-app-altotabancura<br/><i>vacunatorioaltotabancura.cl</i>"]
+        APP["Aplicación PHP 8.5<br/>avx-app-altotabancura<br/><i>vacunatorioaltotabancura.cl</i>"]
         FS["📁 Sistema de archivos<br/>cache/ · out/ · static/"]
     end
 

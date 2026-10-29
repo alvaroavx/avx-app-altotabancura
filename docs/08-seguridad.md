@@ -39,7 +39,7 @@ fuera_de_alcance: base de datos, configuración del servidor, red, pruebas diná
 | [SEC-11](#sec-11--código-de-validación-del-certificado-predecible) | Código de validación del certificado predecible (`md5(RUT)`) | 🟠 Alta | CWE-330, CWE-916 | ✅ Sí |
 | [SEC-12](#sec-12--divulgación-de-información-sensible) | Divulgación de información sensible | 🟠 Alta | CWE-200, CWE-209 | ✅ Sí |
 | [SEC-13](#sec-13--manejo-inseguro-de-contraseñas) | Manejo inseguro de contraseñas | 🟠 Alta | CWE-916, CWE-257 | — |
-| [SEC-14](#sec-14--componentes-sin-soporte-y-sin-parchar) | Componentes sin soporte y sin parchar (PHP 5.6, vendor/) | 🟠 Alta | CWE-1104, CWE-1035 | ❓ |
+| [SEC-14](#sec-14--componentes-sin-soporte-y-sin-parchar) | Dependencias heredadas sin parchar (`vendor/`, jQuery) | 🟠 Alta | CWE-1104, CWE-1035 | ❓ |
 | [SEC-15](#sec-15--sin-límite-de-tasa-y-enumeración-de-usuarios) | Sin límite de tasa; enumeración de usuarios | 🟡 Media | CWE-307, CWE-204 | ✅ Sí |
 | [SEC-16](#sec-16--retención-indefinida-de-datos-de-salud-en-disco) | Retención indefinida de datos de salud en disco | 🟡 Media | CWE-212, CWE-552 | n/a |
 | [SEC-17](#sec-17--despacho-dinámico-y-concatenación-en-la-capa-de-datos) | Despacho dinámico y concatenación en la capa de datos (SQLi latente) | 🟡 Media | CWE-89, CWE-470 | ❌ hoy no |
@@ -441,10 +441,10 @@ nunca en el cliente); usar `type="password"`; no devolver nunca el valor del cam
 
 | Componente | Situación |
 |---|---|
-| **PHP 5.6** | Sin soporte de seguridad desde el **31-12-2018**. Todas las vulnerabilidades posteriores del intérprete están sin parchar. |
+| **PHP 8.5** | Runtime soportado; la aplicación fue adaptada y validada localmente en 8.5. La actualización del intérprete no corrige por sí sola las dependencias heredadas. |
 | **PHPMailer** (`vendor/PHPMailer/`) | Versión ❓ no declarada. Las versiones < 5.2.18 tienen vulnerabilidades de ejecución remota ampliamente explotadas (CVE-2016-10033 y familia). **Verificar la versión con prioridad.** |
 | **jQuery 1.x** | Versión ❓ no declarada. Las versiones < 3.5.0 tienen XSS conocidos (CVE-2020-11022/11023). |
-| **Facebook SDK v5 / Google API Client** | Sin mantenimiento; el `doorlock.php` de Facebook está **corrupto** (bytes binarios). Código muerto. |
+| **Facebook SDK v5 / Google API Client** | Sin mantenimiento y desactivados. El autocargador de Facebook ya es PHP válido, pero la integración sigue fuera de uso y sin regresión funcional. |
 | **blueimp UploadHandler** | Versión ❓; histórico de vulnerabilidades de subida arbitraria. |
 | **Sin gestor de dependencias** | No hay forma sistemática de saber qué versión hay ni de actualizar. |
 

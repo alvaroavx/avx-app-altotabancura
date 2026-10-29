@@ -307,9 +307,10 @@ classDiagram
 
 > ⚠️ **Anomalía de herencia**: `Usuario extends Wiss` y luego invoca sus métodos como
 > **estáticos**: `Wiss::Query('spSel_Usuario', $Datos)` (`cUsuario.php:15`). Como
-> `wQuery::Query` es un método de **instancia** que usa `$this`, PHP 5.6 lo tolera
-> (contexto `$this` heredado) pero es **sintaxis inválida en PHP 7+ en contexto estático real**
-> y una fuente segura de errores en cualquier migración.
+> `wQuery::Query` es un método de **instancia** que usa `$this`; la llamada heredada
+> `Wiss::Query()` desde una instancia sigue funcionando en PHP 8.5, aunque `$this->Query()`
+> expresa mejor el contrato y debe preferirse en código nuevo. La misma llamada desde
+> un contexto realmente estático sí sería inválida.
 >
 > 🔍 Además, la herencia es semánticamente incorrecta: `Usuario` **no es un** `Wiss`;
 > lo usa. Debería ser composición.

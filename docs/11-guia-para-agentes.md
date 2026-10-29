@@ -14,7 +14,7 @@ audiencia: agentes de IA y personas que se incorporan al proyecto
 proyecto:      avx-app-altotabancura
 que_es:        emisión de certificados de vacunación para estudiantes universitarios
 cliente:       Clínica Alto Tabancura (Vitacura, Santiago de Chile)
-lenguaje:      PHP 5.6 (sin soporte de seguridad desde 2018-12-31)
+lenguaje:      PHP 8.5 (runtime objetivo y de producción)
 framework:     "Valk" — propietario, no documentado, sin comunidad
 base_datos:    SQL Server — TODA la lógica de negocio está en procedimientos almacenados
                NO versionados en este repositorio
@@ -52,7 +52,7 @@ build:         ninguno (copiar archivos al servidor)
 | Recuerda que **`FiltrarSesion()` no detiene la ejecución**: añade `exit` | Ver [SEC-01](08-seguridad.md) |
 | Compara la sesión con **`'0'`**, no con `null` ni `false` | `Sesion()` devuelve el string `'0'` |
 | **No escribas SQL en PHP**: crea un procedimiento almacenado | Convención del proyecto |
-| **No introduzcas sintaxis de PHP 7+** (`??`, tipos de retorno, `match`) | El intérprete es 5.6 |
+| Escribe código compatible con **PHP 8.5** y ejecuta lint/pruebas con `E_ALL` | Evita reintroducir APIs deprecadas o depender de tolerancias del runtime antiguo |
 | Mantén el contrato `function X($data){ … echo …; }` | Es lo que el dispatcher espera |
 
 ### 2.3 Después de cambiar código

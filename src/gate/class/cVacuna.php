@@ -14,8 +14,8 @@ class Vacuna extends Wiss {
 
     public function CreateModify($IdVacuna, $Vacuna, $Lote) {
         $Datos['IdVacuna'] = $IdVacuna;
-        $Datos['Vacuna'] = utf8_encode($Vacuna);
-        $Datos['Lote'] = utf8_encode($Lote);
+        $Datos['Vacuna'] = Latin1ToUtf8($Vacuna);
+        $Datos['Lote'] = Latin1ToUtf8($Lote);
         return Wiss::Query('spIns_Vacuna', $Datos);
     }
 

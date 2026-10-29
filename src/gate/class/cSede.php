@@ -27,7 +27,7 @@ class Sede extends Wiss {
     public function CreateModify($IdSede, $IdUniversidad, $Nombre) {
         $Datos['IdSede'] = $IdSede;
         $Datos['IdUniversidad'] = $IdUniversidad;
-        $Datos['Nombre'] = utf8_encode($Nombre);
+        $Datos['Nombre'] = Latin1ToUtf8($Nombre);
         return Wiss::Query('spIns_Sede', $Datos);
     }
 

@@ -15,16 +15,16 @@ class Certificado extends FPDF
         $this->Cell( 40, 40, $this->Image($logo,20,15,80), 0, 0, 'L', false );
         $this->Ln(40);
         $this->SetFont('Times','BU',20);
-        $this->Cell(0,10,utf8_decode('Certificado de Vacunación'),0,1,'C');
+        $this->Cell(0,10,Utf8ToLatin1('Certificado de Vacunación'),0,1,'C');
     }
     function Body($Nombre, $Rut, $Carrera, $Sede, $Universidad) {
         $this->Ln(15);
         $this->SetLeftMargin(20);
         $this->SetRightMargin(20);
         $this->SetFont('Times');
-        //$body = utf8_decode('<p>Procedimientos Clínicos Alto Tabancura, Rut 76.004.217-K, certifica que <b>'.$Nombre.'</b>, Rut <b>'.$Rut.'</b> estudiante de <b>'.$Universidad.'</b> de la carrera <b>'.$Carrera.'</b> fue inmunizado(a) con la(s) siguiente(s) vacuna(s):</p>');
+        //$body = Utf8ToLatin1('<p>Procedimientos Clínicos Alto Tabancura, Rut 76.004.217-K, certifica que <b>'.$Nombre.'</b>, Rut <b>'.$Rut.'</b> estudiante de <b>'.$Universidad.'</b> de la carrera <b>'.$Carrera.'</b> fue inmunizado(a) con la(s) siguiente(s) vacuna(s):</p>');
         //$this->WriteHTML($body);
-        $body = utf8_decode('Procedimientos Clínicos Alto Tabancura, Rut 76.004.217-K, certifica que '.$Nombre.', Rut '.$Rut.' fue inmunizado(a) con la(s) siguiente(s) vacuna(s):');
+        $body = Utf8ToLatin1('Procedimientos Clínicos Alto Tabancura, Rut 76.004.217-K, certifica que '.$Nombre.', Rut '.$Rut.' fue inmunizado(a) con la(s) siguiente(s) vacuna(s):');
         $this->MultiCell(0, 7, $body, 0);
         $this->Ln(5);
     }
@@ -41,7 +41,7 @@ class Certificado extends FPDF
         foreach ($data as $row) {
             $this->Cell(15, 8, '', 0);
             foreach($row as $col) {
-                $this->Cell(35, 7, utf8_decode($col), 1, 0, 'C');
+                $this->Cell(35, 7, Utf8ToLatin1($col), 1, 0, 'C');
             }
             $this->Ln();
         }
@@ -52,9 +52,9 @@ class Certificado extends FPDF
         $this->SetFontSize(14);
         $this->SetRightMargin(20);
         $this->SetFont('Times');
-        $body = utf8_decode('Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.');
+        $body = Utf8ToLatin1('Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.');
         $this->MultiCell(0, 7, $body, 0);
-        //$body = utf8_decode('<p>Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.</p>');
+        //$body = Utf8ToLatin1('<p>Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.</p>');
         //$this->WriteHTML($body);
         $this->Ln(5);
     }
@@ -109,8 +109,8 @@ class Certificado extends FPDF
         $this->Ln(20);
         $this->SetLeftMargin(20);
         $this->SetFontSize(10);
-        $this->Cell(0,5,utf8_decode('Código de validación: '.$Codigo),0,1,'C');
-        $this->Cell(0,5,utf8_decode('Fecha de emisión: '.FormatearFecha(date('m/d/Y', time()), 3)),0,1,'C');
+        $this->Cell(0,5,Utf8ToLatin1('Código de validación: '.$Codigo),0,1,'C');
+        $this->Cell(0,5,Utf8ToLatin1('Fecha de emisión: '.FormatearFecha(date('m/d/Y', time()), 3)),0,1,'C');
         //$this->WriteHTML($body);
 
     }
@@ -118,13 +118,13 @@ class Certificado extends FPDF
     {
         $this->SetLeftMargin(20);
         $this->SetFont('Times');
-        //$this->Cell(0,10,utf8_decode('Certificado de Vacunación'),0,1,'C');
-        $this->Cell(0,5, utf8_decode('Av. Tabancura 1515, Vitacura, Piso 1° Edificio Chañaral, Santiago, Chile.'),0,1,'C');
-        $this->Cell(0,5, utf8_decode('Teléfonos: (02)2371 9062 - (02)22482064 - Email: vacu.altotabancura@gmail.com'),0,1,'C');
-        $this->Cell(0,5, utf8_decode('www.vacunatorio.cl'),0,1,'C');
+        //$this->Cell(0,10,Utf8ToLatin1('Certificado de Vacunación'),0,1,'C');
+        $this->Cell(0,5, Utf8ToLatin1('Av. Tabancura 1515, Vitacura, Piso 1° Edificio Chañaral, Santiago, Chile.'),0,1,'C');
+        $this->Cell(0,5, Utf8ToLatin1('Teléfonos: (02)2371 9062 - (02)22482064 - Email: vacu.altotabancura@gmail.com'),0,1,'C');
+        $this->Cell(0,5, Utf8ToLatin1('www.vacunatorio.cl'),0,1,'C');
         /*
         $this->SetLeftMargin(80);
-        $body = utf8_decode('<p><a href="http://www.vacunatorio.cl">www.vacunatorio.cl</a></p>');
+        $body = Utf8ToLatin1('<p><a href="http://www.vacunatorio.cl">www.vacunatorio.cl</a></p>');
         $this->WriteHTML($body);
         */
     }
@@ -135,7 +135,7 @@ class Certificado extends FPDF
         $this->SetLeftMargin(20);
         $this->SetRightMargin(20);
         $this->SetFont('Times');
-        $body = utf8_decode('Procedimientos Clínicos Alto Tabancura, Rut 76.004.217-K, certifica que las siguientes personas fueron inmunizado(a) con la(s) siguiente(s) vacuna(s): ');
+        $body = Utf8ToLatin1('Procedimientos Clínicos Alto Tabancura, Rut 76.004.217-K, certifica que las siguientes personas fueron inmunizado(a) con la(s) siguiente(s) vacuna(s): ');
         $this->MultiCell(0, 7, $body, 0);
     }
     function VaccinesTabla()
@@ -153,12 +153,12 @@ class Certificado extends FPDF
         $this->Ln(8);
     }
     function UsuariosTabla($Usuario) {
-        $this->Cell(60, 8, utf8_decode($Usuario[0]['Nombre']), 1, 0, 'L');
-        $this->Cell(20, 8, utf8_decode($Usuario[0]['Rut']), 1, 0, 'C');
+        $this->Cell(60, 8, Utf8ToLatin1($Usuario[0]['Nombre']), 1, 0, 'L');
+        $this->Cell(20, 8, Utf8ToLatin1($Usuario[0]['Rut']), 1, 0, 'C');
 
         for($i=0;$i<5;$i++)
             isset($Usuario[$i]) ?
-                $this->Cell(18, 8, isset($Usuario[$i]['Fecha']) ? utf8_encode($Usuario[$i]['Fecha']->format('d-m-Y')) : '-', 1, 0, 'C') :
+                $this->Cell(18, 8, isset($Usuario[$i]['Fecha']) ? Latin1ToUtf8($Usuario[$i]['Fecha']->format('d-m-Y')) : '-', 1, 0, 'C') :
                 $this->Cell(18, 8, '-', 1, 0, 'C');
 
         $this->Ln(8);
@@ -170,9 +170,9 @@ class Certificado extends FPDF
         $this->SetRightMargin(20);
         $this->SetFont('Times');
         $this->Ln(10);
-        $body = utf8_decode('Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.');
+        $body = Utf8ToLatin1('Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.');
         $this->MultiCell(0, 7, $body, 0);
-        //$body = utf8_decode('<p>Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.</p>');
+        //$body = Utf8ToLatin1('<p>Se extiende el presente certificado a nombre del interesado para los fines que estime convenientes.</p>');
         //$this->WriteHTML($body);
         $this->Ln(5);
 
@@ -183,13 +183,13 @@ class Certificado extends FPDF
         $this->SetLeftMargin(0);
         $this->SetRightMargin(0);
         $this->SetFontSize(12);
-        //$this->Cell(0,10,utf8_decode('Certificado de Vacunación'),0,1,'C');
-        $this->Cell(0,5, utf8_decode('Av. Tabancura 1515, Vitacura, Piso 1° Edificio Chañaral, Santiago, Chile.'),0,1,'C');
-        $this->Cell(0,5, utf8_decode('Teléfonos: (02)2371 9062 - (02)22482064 - Email: vacu.altotabancura@gmail.com'),0,1,'C');
-        $this->Cell(0,5, utf8_decode('www.vacunatorio.cl'),0,1,'C');
+        //$this->Cell(0,10,Utf8ToLatin1('Certificado de Vacunación'),0,1,'C');
+        $this->Cell(0,5, Utf8ToLatin1('Av. Tabancura 1515, Vitacura, Piso 1° Edificio Chañaral, Santiago, Chile.'),0,1,'C');
+        $this->Cell(0,5, Utf8ToLatin1('Teléfonos: (02)2371 9062 - (02)22482064 - Email: vacu.altotabancura@gmail.com'),0,1,'C');
+        $this->Cell(0,5, Utf8ToLatin1('www.vacunatorio.cl'),0,1,'C');
         /*
         $this->SetLeftMargin(80);
-        $body = utf8_decode('<p><a href="http://www.vacunatorio.cl">www.vacunatorio.cl</a></p>');
+        $body = Utf8ToLatin1('<p><a href="http://www.vacunatorio.cl">www.vacunatorio.cl</a></p>');
         $this->WriteHTML($body);
         */
     }

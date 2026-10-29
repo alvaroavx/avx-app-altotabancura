@@ -100,9 +100,9 @@ class Usuario extends Wiss {
      * @return mixed
      */
     public function IngresarCertificado($Codigo, $IdUsuario, $Url) {
-        $Datos['Codigo'] = utf8_encode($Codigo);
+        $Datos['Codigo'] = Latin1ToUtf8($Codigo);
         $Datos['IdUsuario'] = $IdUsuario;
-        $Datos['Url'] = utf8_encode($Url);
+        $Datos['Url'] = Latin1ToUtf8($Url);
         return Wiss::Query('spIns_Certificado', $Datos);
     }
 
@@ -113,9 +113,9 @@ class Usuario extends Wiss {
 
     public function CreateModify($IdUsuario, $Nombres, $Apellidos, $Username, $Rut, $FechaNacimiento, $IdCarrera, $IdSede, $Password, $IdTipoUsuario) {
         $Datos['IdUsuario'] = $IdUsuario;
-        $Datos['Nombres'] = utf8_encode($Nombres);
-        $Datos['Apellidos'] = utf8_encode($Apellidos);
-        $Datos['Username'] = utf8_encode($Username);
+        $Datos['Nombres'] = Latin1ToUtf8($Nombres);
+        $Datos['Apellidos'] = Latin1ToUtf8($Apellidos);
+        $Datos['Username'] = Latin1ToUtf8($Username);
         $Datos['Rut'] = $Rut;
         $Datos['FechaNacimiento'] = $FechaNacimiento;
         $Datos['IdCarrera'] = $IdCarrera;

@@ -9,30 +9,30 @@ lectura_previa: 01-arquitectura.md
 
 | Capa | Tecnología | Versión | Evidencia |
 |---|---|---|---|
-| Lenguaje servidor | PHP | **5.6** | `README.md` del repositorio ("Stein php 5.6"); sintaxis compatible (`array()` + `[]`, sin *type hints* escalares) |
+| Lenguaje servidor | PHP | **8.5** | Producción observada en PHP 8.5.12; laboratorio fijado en `php:8.5.12-apache-bookworm` |
 | Servidor web | IIS (producción) / Apache (soportado) | ❓ | `web.config` (IIS URL Rewrite) y `.htaccess`; detección en `valk/loader.php:3-11` |
 | Base de datos | Microsoft SQL Server | ❓ | driver `sqlsrv_*` en `valk/mu/v1.0/SqlServer.php` |
-| Driver PHP↔BD | `sqlsrv` (extensión de Microsoft) | ❓ | `sqlsrv_connect`, `sqlsrv_query` |
+| Driver PHP↔BD | `sqlsrv` (extensión de Microsoft) | **5.13.3 local** | `sqlsrv_connect`, `sqlsrv_query`; la versión 5.13 agrega soporte para PHP 8.5 |
 | Hosting | SmarterASP.NET / site4now | 🔍 | host `sql7004.site4now.net`, prefijo de BD `DB_A42699_` |
 | Protocolo | **HTTP sin TLS** | — | `manifest.php:14` define `http://` |
 | Zona horaria | `America/Santiago` | — | `valk/constants.php:2` |
 
-> ⚠️ **PHP 5.6 dejó de recibir soporte de seguridad el 31 de diciembre de 2018.**
-> Cualquier vulnerabilidad del intérprete descubierta desde entonces está sin parchar.
-> Ver [`09-mejoras-deuda-tecnica.md`](09-mejoras-deuda-tecnica.md) MEJ-01.
+> PHP 8.5 es el runtime objetivo. El cambio corrige la obsolescencia del intérprete,
+> pero no moderniza automáticamente las dependencias heredadas ni los controles de seguridad.
+> Ver [`08-seguridad.md`](08-seguridad.md) y la decisión [D-01](decisiones/README.md).
 
-### Incompatibilidades conocidas con PHP ≥ 7.0
+### Adaptaciones aplicadas para PHP 8.5
 
-Si se intentara actualizar el intérprete, estos puntos **rompen**:
+La migración conserva los contratos de la aplicación y reemplaza incompatibilidades concretas:
 
-| Problema | Ubicación | Versión que rompe |
+| Problema heredado | Corrección |
 |---|---|---|
-| `Clone` usado como nombre de método (palabra reservada) | `gate/class/cNeodoc.php:79` | PHP 7.0 (`clone` es reservada) — mitigado porque la clase no se carga |
-| `utf8_encode()` / `utf8_decode()` deprecadas | ubicuo (`cUsuario.php`, `cCertificado.php`, `tEncode.php`) | PHP 8.2 (deprecation) |
-| `constant()` sobre constante inexistente | `valk/ro/rUploader.php:7` | PHP 8.0 (pasa de *warning* a `Error`) |
-| Acceso a índices de array inexistentes sin `isset` | `valk/gatekeeper.php:3-10`, `valk/ro/rUploader.php:3-10` | PHP 8.0 (*warning* → sigue funcionando) |
-| `$this->$tag += ...` con propiedad dinámica | `gate/class/cCertificado.php:236` | PHP 8.2 (deprecation de propiedades dinámicas) |
-| `each()`, `mssql_*` | comentados en `SqlServer.php:35` | ya eliminados en PHP 7 |
+| `utf8_encode()` / `utf8_decode()` deprecadas | Funciones explícitas `Latin1ToUtf8()` y `Utf8ToLatin1()` basadas en `mb_convert_encoding()` |
+| FPDF 1.81 usa conversiones deprecadas | Conversión interna compatible y guardia para *magic quotes* inexistente |
+| Acceso a strings con llaves en XLSXWriter | Acceso actualizado a corchetes y propiedades declaradas/inicializadas |
+| Orden histórico de argumentos de `implode()` | Orden `separador, array` en UploadHandler y Google Resource |
+| Autocargador Facebook corrupto | Autocargador PSR-4 válido; el módulo continúa desactivado |
+| Microsoft `sqlsrv` 5.12 sin soporte para PHP 8.5 | Laboratorio actualizado a `sqlsrv`/`pdo_sqlsrv` 5.13.3 |
 
 ## 2. Dependencias de terceros (`vendor/`)
 
@@ -42,9 +42,9 @@ con un archivo `doorlock.php` por librería que actúa como *autoloader* propio
 
 | Librería | Uso real | Estado | Riesgo |
 |---|---|---|---|
-| **FPDF** | ✅ **En uso**: generación de todos los certificados PDF | `vendor/FPDF/fpdf.php` | Versión ❓ sin declarar |
+| **FPDF** | ✅ **En uso**: generación de todos los certificados PDF | 1.81, adaptada a PHP 8.5 | Dependencia heredada que debe mantenerse cubierta por pruebas de PDF |
 | **PHPMailer** | ⚠️ Cargada pero **inoperante** (envío en bypass permanente) | `vendor/PHPMailer/` | ❗ versiones antiguas de PHPMailer tienen CVEs de RCE (CVE-2016-10033 y familia) — **verificar versión** |
-| **Facebook SDK v5** | ❌ Desactivado (`Modulo_Facebook = 0`) | `vendor/Facebook/` | Código muerto; `doorlock.php` está **corrupto** (contiene bytes binarios tras la línea 60) |
+| **Facebook SDK v5** | ❌ Desactivado (`Modulo_Facebook = 0`) | `vendor/Facebook/`; autocargador reparado | Código heredado sin uso funcional actual |
 | **Google API Client** | ❌ Desactivado e **incompleto** (`autoload.php.old`, sin `doorlock.php`) | `vendor/Google/` | Código muerto; cargarlo fallaría |
 | **Jodit** (editor WYSIWYG) | ❌ Desactivado (`Modulo_Jodit = 0`) | `vendor/Jodit/` | Código muerto |
 
@@ -80,7 +80,7 @@ con un archivo `doorlock.php` por librería que actúa como *autoloader* propio
 | Extensión `sqlsrv` habilitada | acceso a BD | `SqlServer.php:38` |
 | Extensión `openssl` habilitada | `encrypt_decrypt()` para `/e/` y `gate.php` | `tEncode.php:180-190` |
 | Extensión `simplexml` habilitada | `ArrayToXml()` — usada para pasar filtros a los SP | `tFormato.php:157` |
-| Extensión `mbstring`/`iconv` | ❌ **no requerida** (usa `utf8_encode/decode` nativas) | — |
+| Extensión `mbstring` | conversiones explícitas entre ISO-8859-1 y UTF-8 | `Latin1ToUtf8()` / `Utf8ToLatin1()` |
 | **Permiso de escritura** en `cache/` | generación de assets concatenados | `valk/scripts.php`, `valk/styles.php` |
 | **Permiso de escritura** en `out/` | escritura de PDFs generados | `gate/omega/xCertificado.php:70` |
 | **Permiso de escritura** en la raíz | `log.txt` escrito por `Log2()` | `valk/tools/tCore.php:38-42` |

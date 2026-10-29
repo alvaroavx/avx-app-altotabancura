@@ -2,13 +2,13 @@
 
 ## Propósito y límites
 
-Este laboratorio ejecuta la aplicación original sobre PHP 8.2 y una copia local de SQL Server. Su objetivo es reproducir y corregir la generación y descarga de certificados sin conectar con producción.
+Este laboratorio ejecuta la aplicación sobre PHP 8.5 y una copia local de SQL Server. Su objetivo es reproducir y validar login, generación y descarga de certificados sin conectar con producción.
 
 No es una arquitectura objetivo de producción. No despliega, no sincroniza datos, no publica puertos de SQL Server y no habilita integraciones externas.
 
 ## Componentes
 
-- `web`: imagen oficial PHP 8.2 con Apache, Microsoft ODBC Driver 18 y `sqlsrv`/`pdo_sqlsrv` 5.12.
+- `web`: imagen oficial PHP 8.5.12 con Apache, Microsoft ODBC Driver 18, `sqlsrv`/`pdo_sqlsrv` 5.13.3 y extensiones requeridas por la aplicación, incluida `zip` para exportaciones XLSX.
 - `sqlserver`: imagen oficial SQL Server 2019 Developer `2019-CU32-GDR12-ubuntu-20.04`.
 - `mssql-data`: volumen persistente de la base local.
 - `generated-files`: volumen de documentos generados en `/var/www/generated`, fuera del document root.
@@ -144,7 +144,7 @@ Versiones y extensiones PHP:
 
 ```bash
 docker compose exec web php -v
-docker compose exec web php -m | grep -E 'sqlsrv|pdo_sqlsrv|gd|mbstring|curl|openssl'
+docker compose exec web php -m | grep -E 'sqlsrv|pdo_sqlsrv|gd|mbstring|curl|openssl|zip'
 ```
 
 Conectividad interna y estado SQL:
@@ -161,13 +161,26 @@ No pegue salidas que contengan datos clínicos o credenciales en reportes.
 | Área | Laboratorio | Producción conocida |
 |---|---|---|
 | Servidor web | Apache sobre Linux | IIS sobre Windows Server |
-| PHP | 8.2 en contenedor | 8.2.x en hosting |
+| PHP | 8.5.12 en contenedor | 8.5.x en hosting |
 | SQL Server | 2019 Developer, compatibilidad 130 | 2016 SP3 |
 | Rutas | Sensibles a mayúsculas; `/` | Windows y rutas de IIS |
 | Base URL | `127.0.0.1:8080` | Dominio productivo |
 | Credenciales | Aleatorias, solo locales | Administradas fuera de este laboratorio |
 | Correo e integraciones | Aislados por configuración y red interna | No verificados en esta etapa |
 | Archivos PDF | Volumen fuera del document root | Ruta productiva por confirmar |
+
+## Archivos operativos del document root
+
+La raíz desplegable es `src/`. Además del código y los recursos incluye:
+
+- `.htaccess`, para el enrutamiento equivalente bajo Apache local.
+- `web.config`, para el enrutamiento bajo IIS/SmarterASP.
+- `.user.ini`, que conserva el destino de registro de errores observado en el respaldo del hosting.
+
+No forman parte del despliegue `default.asp` (página temporal del proveedor),
+`phpinfo.php` (expone configuración del servidor) ni el README histórico de PHP 5.6.
+El respaldo de producción se conserva únicamente como evidencia de comparación y
+no debe copiarse completo sobre `src/`.
 
 ## Evidencia de esta ejecución
 

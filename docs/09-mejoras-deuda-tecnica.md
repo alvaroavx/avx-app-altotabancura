@@ -39,22 +39,19 @@ quadrantChart
 
 ## 2. Deuda crítica (bloquea la continuidad del sistema)
 
-### MEJ-01 · Migrar a una versión de PHP con soporte
-**Impacto: alto · Esfuerzo: alto · Riesgo de no hacerlo: crítico**
+### MEJ-01 · Mantener la compatibilidad con PHP 8.5
+**Estado: implementado el 2026-10-29 · Impacto: alto · Riesgo residual: medio**
 
-PHP 5.6 no recibe parches de seguridad desde el 31-12-2018. Muchos proveedores de
-hosting ya no lo ofrecen, por lo que **un cambio de servidor obligaría a migrar sin plazo**.
+El runtime objetivo y productivo es PHP 8.5. La aplicación reemplazó las conversiones
+deprecadas, reparó sintaxis y utilidades heredadas, y actualizó el laboratorio a
+`sqlsrv` 5.13.3. La suite cubre runtime, codificación, PDF, XLSX, login y certificados.
 
-Trabajo requerido (ver la tabla de incompatibilidades en [`02-stack-tecnologico.md`](02-stack-tecnologico.md) §1):
-1. Sustituir las llamadas estáticas a métodos de instancia (`Wiss::Query(...)` → `$this->Query(...)`).
-2. Reemplazar `utf8_encode`/`utf8_decode` por `mb_convert_encoding` (o eliminar la doble conversión, MEJ-09).
-3. Blindar los accesos a índices de array inexistentes (`isset`/`??`).
-4. Renombrar el método `Clone` de `cNeodoc.php` (o eliminar el archivo, MEJ-05).
-5. Verificar la compatibilidad de `sqlsrv` con la versión destino.
-6. Revisar propiedades dinámicas en `Certificado` (`$this->$tag`).
+Trabajo residual:
 
-> 💡 Ruta sugerida: 5.6 → 7.4 (mismo estilo de código, ganancia de rendimiento notable)
-> y luego evaluar 8.x. Intentar 5.6 → 8.3 de una vez multiplica el riesgo.
+1. Mantener PHP 8.5 y el driver `sqlsrv` en versiones soportadas.
+2. Ejecutar lint y pruebas con `E_ALL` en cada despliegue.
+3. Renovar dependencias heredadas por separado (FPDF, PHPMailer y JavaScript).
+4. Completar la regresión por rol en el hosting cuando cambie el runtime o sus extensiones.
 
 ### MEJ-02 · Versionar el esquema y los procedimientos de la base de datos
 **Impacto: crítico · Esfuerzo: medio**
@@ -167,7 +164,7 @@ superficie de ataque, tiempo de comprensión y ruido en las búsquedas:
 | A eliminar | Motivo | Referencia |
 |---|---|---|
 | `gate/class/cNeodoc.php` | De otro producto; no está en `construct.php` | — |
-| `vendor/Facebook/`, `vendor/Google/` | Módulos desactivados; el `doorlock.php` de Facebook está corrupto | `manifest.php:28-30` |
+| `vendor/Facebook/`, `vendor/Google/` | Módulos desactivados y heredados; el autocargador de Facebook fue reparado, pero no se validó integración social | `manifest.php:28-30` |
 | `vendor/Jodit/` | Desactivado | `manifest.php:31` |
 | `valk/mu/v1.0/RedSocial.php`, `valk/endpoint.php` | Login social desactivado | — |
 | `valk/mu/v1.0/Chat.php`, `valk/commands/wChat.php` | Sin interfaz | — |
@@ -296,7 +293,7 @@ gantt
     MEJ-07 Manejo de errores             :m7, after m5, 10d
 
     section 🟡 Estructurales
-    MEJ-01 Migrar PHP 5.6 → 7.4          :m1, after f2, 60d
+    MEJ-01 PHP 8.5 completado              :done, m1, 2026-10-29, 1d
     MEJ-12 Pruebas automatizadas         :m12, after m8, 60d
     MEJ-09 Unificar UTF-8                :m9, after m1, 20d
     MEJ-13 Rendimiento                   :m13, after m1, 20d

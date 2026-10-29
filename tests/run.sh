@@ -124,10 +124,13 @@ grep -qx 'web' <<<"$running_services" || fail "El servidor web no está ejecutá
 pass "servicios Docker en ejecución"
 
 missing_extensions="$(docker compose exec -T web php -r '
-$required = ["sqlsrv", "pdo_sqlsrv", "gd", "mbstring", "curl", "openssl"];
+$required = ["sqlsrv", "pdo_sqlsrv", "gd", "mbstring", "curl", "openssl", "zip"];
 echo implode(",", array_values(array_filter($required, fn($name) => !extension_loaded($name))));
 ')"
 assert_eq "" "$missing_extensions" "PHP tiene todas las extensiones requeridas"
+
+docker compose exec -T -w /var/www/html web php < tests/php85-compat.php
+pass "runtime, codificación, PDF y XLSX son compatibles con PHP 8.5"
 
 ./scripts/prepare-test-accounts.sh >/dev/null
 pass "fixtures ficticios preparados"

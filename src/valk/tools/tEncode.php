@@ -1,6 +1,18 @@
 <?php
 /**NJONG 06.11.18: TOOLS ENCODE**/
 {
+    /**
+     * Reemplazos compatibles con PHP 8.5 para utf8_encode/utf8_decode.
+     * Conservan la conversión histórica entre ISO-8859-1 y UTF-8.
+     */
+    function Latin1ToUtf8($texto){
+        return mb_convert_encoding((string)$texto, 'UTF-8', 'ISO-8859-1');
+    }
+
+    function Utf8ToLatin1($texto){
+        return mb_convert_encoding((string)$texto, 'ISO-8859-1', 'UTF-8');
+    }
+
     /**ALVAX 07.10.2018 LE CAMBIARIA EL NOMBRE A: EstandarizaSaltosLinea **/
     /**
      * SaltoLinea: cambia los saltos de linea, se debe enviar el formato de salida deseado: string o html
@@ -81,7 +93,7 @@
      */
     function DecodePost($request){
         $raw_data = array();
-        $decode_request = utf8_decode(LimpiaHtml(urldecode(base64_decode($request))));
+        $decode_request = Utf8ToLatin1(LimpiaHtml(urldecode(base64_decode($request))));
         $temp = explode('<njong>', $decode_request);
         foreach($temp as $tval) {
             $t = explode('<alvax>', $tval);
@@ -120,7 +132,7 @@
         foreach($temp as $tval) {
             if($tval != 'undefined') {
                 $t = explode('<valk>', $tval);
-                $raw_data[$t[0]] = utf8_decode(LimpiaHtml($t[1]));
+                $raw_data[$t[0]] = Utf8ToLatin1(LimpiaHtml($t[1]));
             }
         }
         return $raw_data;

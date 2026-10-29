@@ -344,7 +344,8 @@ ruta `/e/<payload-AES>`, procedimiento `spRec_Usuario_MultiCuenta`) pero:
 - `Modulo_Facebook = 0` y `Modulo_Google = 0` (`manifest.php:28-30`);
 - `$Var['Facebook']['Id']` y `['Secret']` están **vacíos** (`gate/var.php:43-46`);
 - Google nunca se implementó (`$Link['Google'] = 'PENDIENTE'`, `RedSocial.php:54`);
-- `vendor/Facebook/doorlock.php` está **corrupto** (bytes binarios desde la línea ~60);
+- `vendor/Facebook/doorlock.php` fue reemplazado por un autocargador PHP válido, pero
+  el módulo continúa desactivado y no tiene regresión funcional;
 - `vendor/Google/` no tiene `doorlock.php`, solo un `autoload.php.old`.
 
 ⇒ Si alguien activara estos flags, la aplicación **fallaría al cargar**.

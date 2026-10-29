@@ -183,7 +183,7 @@ function LoadResultados($data) {
                 </tr>
             </thead>
             <tbody>';
-        $Busqueda = $Usuario->Get(utf8_encode($data['busqueda']), ArrayToXml($Filtros));
+        $Busqueda = $Usuario->Get(Latin1ToUtf8($data['busqueda']), ArrayToXml($Filtros));
         foreach ($Busqueda as $usuario) {
             echo '<tr data-idusuario="'.$usuario['IdUsuario'].'">
                     <td><input class="check_usuario" type="checkbox" name="usuario" data-idusuario="'.$usuario['IdUsuario'].'" onclick="$.CheckClick()"></td>
@@ -296,7 +296,7 @@ function LoadResultadosPaginado($data) {
             </thead>
             <tbody>';
         $Busqueda = $Usuario->GetPaginado(
-                utf8_encode($data['busqueda']),
+                Latin1ToUtf8($data['busqueda']),
                 $data['iduniversidad'],
                 $data['idsede'],
                 $data['idcarrera'],
@@ -355,7 +355,7 @@ function LoadResultadosPaginado($data) {
             </thead>
             <tbody>';
         $Busqueda = $Usuario->GetPaginado(
-            utf8_encode($data['busqueda']),
+            Latin1ToUtf8($data['busqueda']),
             $data['iduniversidad'],
             $data['idsede'],
             $data['idcarrera'],
@@ -396,7 +396,7 @@ function LoadPaginacion($data) {
 
     $Usuario = new Usuario();
     $Busqueda = $Usuario->GetPaginadoTotal(
-        utf8_encode($data['busqueda']),
+        Latin1ToUtf8($data['busqueda']),
         $data['iduniversidad'],
         $data['idsede'],
         $data['idcarrera'],

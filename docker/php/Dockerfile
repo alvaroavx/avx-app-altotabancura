@@ -1,6 +1,6 @@
-FROM php:8.2-apache-bookworm
+FROM php:8.5.12-apache-bookworm
 
-ARG SQLSRV_VERSION=5.12.0
+ARG SQLSRV_VERSION=5.13.3
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -13,6 +13,7 @@ RUN apt-get update \
         libkrb5-3 \
         libonig-dev \
         libpng-dev \
+        libzip-dev \
         unixodbc-dev \
     && curl -fsSLo /tmp/packages-microsoft-prod.deb \
         https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb \
@@ -21,7 +22,7 @@ RUN apt-get update \
     && apt-get update \
     && ACCEPT_EULA=Y apt-get install -y --no-install-recommends msodbcsql18 \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" curl gd mbstring \
+    && docker-php-ext-install -j"$(nproc)" curl gd mbstring zip \
     && pecl install sqlsrv-${SQLSRV_VERSION} pdo_sqlsrv-${SQLSRV_VERSION} \
     && docker-php-ext-enable sqlsrv pdo_sqlsrv \
     && a2enmod rewrite headers \

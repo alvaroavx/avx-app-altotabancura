@@ -3,7 +3,7 @@ doc: indice
 proyecto: avx-app-altotabancura
 nombre_producto: Aplicación de Certificados de Vacunación — Clínica Alto Tabancura
 dominio_produccion: http://vacunatorioaltotabancura.cl/
-stack: PHP 5.6 · framework propio "Valk/Steins" · SQL Server · jQuery
+stack: PHP 8.5 · framework propio "Valk/Steins" · SQL Server · jQuery
 estado_documentacion: completa (generada por análisis estático del código, 2026-09-09)
 fuente_de_verdad: el código del repositorio; esta documentación es derivada
 alcance: evidencia estática; no certifica operación, base de datos ni producción
@@ -100,7 +100,7 @@ Una recomendación, diseño objetivo o plan de remediación no significa que ya 
 
 | Área | Evidencia disponible | Límite importante |
 |---|---|---|
-| Aplicación | Lectura estática de PHP, JavaScript, configuración y dependencias versionadas | No prueba ejecución bajo PHP 5.6 ni comportamiento en servidor real |
+| Aplicación | Lectura estática, lint PHP 8.5, pruebas locales de login/certificados y verificación del runtime productivo | La validación local no reemplaza una regresión completa de cada rol en producción |
 | Persistencia | Nombres, parámetros y resultados consumidos de procedimientos | No hay DDL, migraciones, tablas ni procedures versionados |
 | Seguridad | Superficie y controles observables en el repositorio | No hubo pentest, escaneo dinámico ni verificación de configuración externa |
 | Operación | Requisitos y runbook propuestos desde el código | No hay despliegue reproducible, CI ni evidencia de producción |

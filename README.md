@@ -28,7 +28,7 @@ Contiene un monolito PHP legado, el framework interno Valk/Steins, interfaz AJAX
 
 ### Qué puede mejorar y oportunidades
 
-La prioridad es reducir el riesgo antes de cualquier exposición pública: retirar secretos versionados, sustituir autenticación y despacho inseguros, revisar autorización del lado servidor y cerrar superficies de prueba/carga de archivos. Después conviene versionar esquema y procedimientos SQL, introducir dependencias reproducibles, pruebas automatizadas, observabilidad y un camino de modernización desde PHP 5.6. La hoja de ruta y la evidencia de estos riesgos están en [seguridad](docs/08-seguridad.md) y [mejoras y deuda](docs/09-mejoras-deuda-tecnica.md).
+La prioridad es reducir el riesgo antes de cualquier exposición pública: retirar secretos versionados, sustituir autenticación y despacho inseguros, revisar autorización del lado servidor y cerrar superficies de prueba/carga de archivos. El runtime ya fue adaptado a PHP 8.5; todavía conviene versionar esquema y procedimientos SQL, completar la renovación de dependencias, mejorar la observabilidad y continuar la remediación de seguridad. La hoja de ruta y la evidencia de estos riesgos están en [seguridad](docs/08-seguridad.md) y [mejoras y deuda](docs/09-mejoras-deuda-tecnica.md).
 
 ## Documentación
 
@@ -43,7 +43,7 @@ La guía IA First, con arquitectura, flujos, modelo de datos reconstruido, riesg
 
 ## Inicio y estado conocido
 
-La raíz web de la aplicación es `src/`. El runtime esperado es PHP 5.6; requisitos, configuración y límites de despliegue están documentados en [docs/02-stack-tecnologico.md](docs/02-stack-tecnologico.md). No hay migraciones, esquema SQL ni pipeline reproducible versionados. No se debe desplegar el snapshot a internet sin revisar [seguridad](docs/08-seguridad.md).
+La raíz web de la aplicación es `src/`. El runtime soportado es PHP 8.5 con el driver Microsoft `sqlsrv` 5.13; requisitos, configuración y límites de despliegue están documentados en [docs/02-stack-tecnologico.md](docs/02-stack-tecnologico.md). No hay migraciones ni esquema SQL versionados. No se debe desplegar el snapshot a internet sin revisar [seguridad](docs/08-seguridad.md).
 
 El laboratorio Docker para recuperación de certificados se opera siguiendo [docs/entorno-local.md](docs/entorno-local.md). Es exclusivamente local y no reemplaza la infraestructura productiva.
 
