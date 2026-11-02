@@ -26,6 +26,8 @@ try {
     $pdf = new FPDF();
     $pdf->AddPage();
     $pdf->SetFont('Arial', '', 12);
+    $pdf->Cell(0, 5, null);
+    $pdf->Ln();
     $pdf->Cell(0, 10, Utf8ToLatin1('Certificado de vacunación - Álvaro Núñez'));
     $pdf->Output('F', $pdfPath);
 

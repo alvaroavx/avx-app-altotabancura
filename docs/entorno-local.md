@@ -176,6 +176,7 @@ La raíz desplegable es `src/`. Además del código y los recursos incluye:
 - `.htaccess`, para el enrutamiento equivalente bajo Apache local.
 - `web.config`, para el enrutamiento bajo IIS/SmarterASP.
 - `.user.ini`, que conserva el destino de registro de errores observado en el respaldo del hosting.
+- `out/`, directorio que debe existir y tener permiso de escritura en SmarterASP para generar certificados y exportaciones.
 
 No forman parte del despliegue `default.asp` (página temporal del proveedor),
 `phpinfo.php` (expone configuración del servidor) ni el README histórico de PHP 5.6.

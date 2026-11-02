@@ -1,6 +1,7 @@
 .env
 .env.local
-src/out/
+src/out/*
+!src/out/.gitkeep
 data/*.bak
 data/*.mdf
 data/*.ndf

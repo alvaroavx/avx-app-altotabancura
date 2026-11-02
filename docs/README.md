@@ -79,7 +79,8 @@ avx-app-altotabancura/
 │   │   └── js/ css/       #   Cliente del framework
 │   ├── vendor/            # Librerías de terceros copiadas a mano (sin Composer)
 │   │   └── FPDF/ PHPMailer/ Facebook/ Google/ Jodit/
-│   └── res/ img/          # Recursos estáticos (íconos, logo, firma digitalizada)
+│   ├── res/ img/          # Recursos estáticos (íconos, logo, firma digitalizada)
+│   └── out/               # Salida productiva de certificados; debe ser escribible
 ├── data/                  # Respaldos locales de BD; los .bak no se versionan
 ├── docs/                  # ← documentación IA First
 ├── AGENTS.md              # Guía operativa para agentes

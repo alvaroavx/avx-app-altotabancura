@@ -114,6 +114,9 @@ for command in docker curl php pdfinfo pdftotext; do
 done
 pass "herramientas de prueba disponibles"
 
+[[ -d src/out ]] || fail "Falta src/out, requerido por el despliegue productivo para generar certificados"
+pass "directorio productivo de certificados incluido en src"
+
 [[ "${APP_ENV:-}" == "local" ]] || fail "La suite solo puede ejecutarse con APP_ENV=local"
 [[ "$base_url" == "http://127.0.0.1:8080" ]] || fail "APP_BASE_URL debe apuntar al laboratorio local"
 pass "entorno limitado a localhost"
